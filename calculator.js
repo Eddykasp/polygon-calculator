@@ -25,33 +25,31 @@ function calculate (){
         vector.y = tmpY;
         vector.x = tmpX;
     }
-    draw(vertices, ctx, canvas);
+    draw(vertices, ctx, canvas, length);
 }
 
 function toRadians (angle) {
     return angle * (Math.PI / 180);
 }
 
-function draw(vertices, ctx, canvas){
+function draw(vertices, ctx, canvas, length){
     ctx.fillStyle = 'white';
     let h = canvas.height;
     ctx.fillRect(0,0,canvas.width, canvas.height);
-    let scale;// = Math.round(canvas.width/Math.abs(vertices[0].x - vertices[Math.round(vertices.length/2)].x))*0.5;
-    console.log('scale: ' + scale);
-    let padding = 200;
-    scale = 10;
+    let padding = 50+vertices.length/10;
+    let scale = 250/vertices.length;
     ctx.fillStyle = 'black';
     for(let i=0; i<vertices.length; i++){
-        let startX = vertices[i].x*scale+padding;
-        let startY = h-vertices[i].y*scale-padding;
+        let startX = vertices[i].x/length*scale+padding;
+        let startY = h-vertices[i].y/length*scale-padding;
         let endX;
         let endY;
         if(i<vertices.length-1){
-          endX = vertices[i+1].x*scale+padding;
-          endY = h-vertices[i+1].y*scale-padding;
+          endX = vertices[i+1].x/length*scale+padding;
+          endY = h-vertices[i+1].y/length*scale-padding;
         } else {
-          endX = vertices[0].x*scale+padding;
-          endY = h-vertices[0].y*scale-padding;
+          endX = vertices[0].x/length*scale+padding;
+          endY = h-vertices[0].y/length*scale-padding;
         }
         console.log(startX + ', ' + startY + ' | ' + endX + ', ' + endY);
         ctx.lineWidth = 1;
