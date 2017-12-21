@@ -26,6 +26,7 @@ function calculate (){
         vector.x = tmpX;
     }
     draw(vertices, ctx, canvas, length);
+    vertexTable(vertices);
 }
 
 function toRadians (angle) {
@@ -59,4 +60,8 @@ function draw(vertices, ctx, canvas, length){
         ctx.stroke();
 
     }
+}
+
+function vertexTable(vertices){
+    
 }
