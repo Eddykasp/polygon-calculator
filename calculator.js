@@ -63,5 +63,10 @@ function draw(vertices, ctx, canvas, length){
 }
 
 function vertexTable(vertices){
-    
+    let tbody = document.getElementById('vertex-table');
+    let tcontent = '';
+    for (v of vertices){
+      tcontent += '<tr><td>' + Math.round(v.x*100)/100 + '</td><td>' + Math.round(v.y*100)/100 + '</td></tr>';
+    }
+    tbody.innerHTML = tcontent;
 }
