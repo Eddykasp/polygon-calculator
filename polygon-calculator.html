@@ -7,13 +7,24 @@
   </head>
   <body>
     <form class="" action="index.html" method="get">
-      Number of sides:
-      <input type="text" id="sides-number" value="">
-      Length of each side:
-      <input type="text" id="side-length" value="">
-      Initial starting degree:
-      <input type="text" id="start-degree" value="">
-      <input type="button" name="calculate-button" onclick="calculate();">
+      <table>
+        <tr>
+          <td>Number of sides:</td>
+          <td><input type="text" id="sides-number" value=""></td>
+        </tr>
+        <tr>
+          <td>Length of each side:</td>
+          <td><input type="text" id="side-length" value=""></td>
+        </tr>
+        <tr>
+          <td>Initial starting degree:</td>
+          <td><input type="text" id="start-degree" value=""></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><input type="button" name="calculate-button" onclick="calculate();"></td>
+        </tr>
+      </table>
     </form>
     <canvas id="output-canvas" width="200" height="200"></canvas>
   </body>
