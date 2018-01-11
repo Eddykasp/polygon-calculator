@@ -17,20 +17,22 @@ function calculate (){
     // add next vector
     vertices.push({x: vertices[i].x+vector.x, y: vertices[i].y+vector.y});
     // rotate for next iteration
-    let tmpX = vector.x*Math.cos(toRadians(180-innerAngle)) - vector.y*Math.sin(toRadians(180-innerAngle));
-    tmpX = Math.round(tmpX * 1000)/1000;
-    //console.log(vector.x*Math.cos(toRadians(innerAngle)) - vector.y*Math.sin(toRadians(innerAngle)));
-    let tmpY = vector.x*Math.sin(toRadians(180-innerAngle)) + vector.y*Math.cos(toRadians(180-innerAngle));
-    tmpY = Math.round(tmpY * 1000)/1000;
-    vector.y = tmpY;
-    vector.x = tmpX;
+    vector = rotate(vector, innerAngle);
+    vector.x = Math.round(vector.x * 1000)/1000;
+    vector.y = Math.round(vector.y * 1000)/1000;
   }
   draw(vertices, ctx, canvas, length);
   vertexTable(vertices);
 }
 
-function toRadians (angle) {
+function toRadians(angle) {
   return angle * (Math.PI / 180);
+}
+
+function rotate(vector, angle) {
+  let newX = vector.x*Math.cos(toRadians(180-angle)) - vector.y*Math.sin(toRadians(180-angle));
+  let newY = vector.x*Math.sin(toRadians(180-angle)) + vector.y*Math.cos(toRadians(180-angle));
+  return {x: newX, y: newY};
 }
 
 function draw(vertices, ctx, canvas, length){
