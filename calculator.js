@@ -7,6 +7,9 @@ function calculate (){
   let angle = parseFloat(document.getElementById('start-degree').value);
 
   let vector = {x: length, y: 0.0};
+  if(angle){
+    vector = rotate(vector, angle);
+  }
   let vertices = [];
   let totalAngle = (sides-2)*180;
   let innerAngle = totalAngle/sides;
