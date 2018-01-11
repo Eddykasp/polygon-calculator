@@ -8,12 +8,11 @@ function calculate (){
 
   let vector = {x: length, y: 0.0};
   if(angle){
-    vector = rotate(vector, angle);
+    vector = rotate(vector, 180-angle);
   }
   let vertices = [];
   let totalAngle = (sides-2)*180;
   let innerAngle = totalAngle/sides;
-  //console.log('sides: ' + sides + ' total angle: ' + totalAngle + ' inner angle: ' + innerAngle);
   vertices.push({x: 0.0, y: 0.0});
   //console.log(vertices);
   for(let i=0;i<sides-1;i++){
@@ -42,22 +41,34 @@ function draw(vertices, ctx, canvas, length){
   ctx.fillStyle = 'white';
   let h = canvas.height;
   ctx.fillRect(0,0,canvas.width, canvas.height);
-  let padding = 50+vertices.length/10;
   let scale = 250/vertices.length;
+  // find smallest x and y
+  let minx = 1000;
+  let miny = 1000;
+  for(let v of vertices){
+    if (minx > v.x){
+      minx = v.x;
+    }
+    if (miny > v.y){
+      miny = v.y;
+    }
+  }
+  let xshift = -1*minx;
+  let yshift = -1*miny;
+
   ctx.fillStyle = 'black';
   for(let i=0; i<vertices.length; i++){
-    let startX = vertices[i].x/length*scale+padding;
-    let startY = h-vertices[i].y/length*scale-padding;
+    let startX = (vertices[i].x+xshift)/length*scale;
+    let startY = h-(vertices[i].y+yshift)/length*scale;
     let endX;
     let endY;
     if(i<vertices.length-1){
-      endX = vertices[i+1].x/length*scale+padding;
-      endY = h-vertices[i+1].y/length*scale-padding;
+      endX = (vertices[i+1].x+xshift)/length*scale;
+      endY = h-(vertices[i+1].y+yshift)/length*scale;
     } else {
-      endX = vertices[0].x/length*scale+padding;
-      endY = h-vertices[0].y/length*scale-padding;
+      endX = (vertices[0].x+xshift)/length*scale;
+      endY = h-(vertices[0].y+yshift)/length*scale;
     }
-    //console.log(startX + ', ' + startY + ' | ' + endX + ', ' + endY);
     ctx.lineWidth = 1;
     ctx.beginPath();
     ctx.moveTo(startX, startY);
